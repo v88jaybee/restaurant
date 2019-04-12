@@ -1,0 +1,39 @@
+<h3>Write a review for <%= @restaurant.name %></h3>
+
+<div>
+	<% if flash[:errors] %>
+		<% flash[:errors].each do |e| %>
+			<p><%= e %></p>
+		<% end %>
+	<% end %>
+
+	<form action="/submit_review" method="post">
+		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+		<input type="hidden" name="restaurant_review[restaurant_id]" value="<%= @restaurant.id %>">
+
+		<div>
+			<span>Your Name:</span>
+			<label for="customer_name">
+				<input type="text" name="restaurant_review[customer_name]" id="customer_name" value="<%= @restaurant_review.customer_name %>">
+			</label>
+		</div>
+		<div>
+			<span>Stars:</span>
+			<select name="restaurant_review[star_level]" id="star_level" value="<%= @restaurant_review.star_level %>">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</select>
+		</div>
+		<div>
+			<label for="review_text">
+				<textarea name="restaurant_review[description]" id="review_text" cols="30" rows="10" value="<%= @restaurant_review.description %>"></textarea>
+			</label>
+		</div>
+		
+		<input type="submit" value="Cancel" name="process_type" />
+		<input type="submit" value="Submit" name="process_type" />
+	</form>
+</div>

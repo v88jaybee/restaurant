@@ -1,0 +1,25 @@
+<%= button_to "New Restaurant", restaurants_new_path, method: :get %>
+
+<table>
+	<thead>
+		<th>Restaurant</th>
+		<th>Cuisine</th>
+		<th>Actions Available</th>
+	</thead>
+	<tbody>
+		<% if @restaurants.present? %>
+			<%  @restaurants.each do |restaurant| %>
+				<tr>
+					<td><%= restaurant.name %></td>
+					<td><%= restaurant.cuisine_type %></td>
+					<td>
+						<%= button_to "Read reviews", { :controller => 'restaurants', :action => 'review', id: restaurant.id }, method: :get %>
+						<%= button_to "Update",  { :controller => 'restaurants', :action => 'edit', id: restaurant.id }, method: :get %>
+						<%= button_to "Delete", { :controller => 'restaurants', :action => 'delete', id: restaurant.id }, method: :get , :disabled => ((Time.parse(Time.now.utc.to_s) - Time.parse(restaurant.created_at.to_s)).to_i > 30) ? false : true %>
+					</td>
+				</tr>
+			<% end %>
+		<% end %>
+	</tbody>
+</table>
+
