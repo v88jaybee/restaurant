@@ -1,8 +1,8 @@
 <h3> Review for <%= @restaurant.name %> </h3>
 
-<%= button_to "New Review", { :controller => 'restaurants', :action => 'new_review', id: @restaurant.id }, method: :get %>
+<%= link_to "New Review", { :controller => 'restaurants', :action => 'new_review', id: @restaurant.id }, {class: 'btn btn-info', method: :get} %>
 
-<table>
+<table class="table table-hover">
 	<thead>
 		<th>Customer</th>
 		<th>Stars</th>
